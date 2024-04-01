@@ -21,7 +21,6 @@ from domainbed.lib.misc import (
 
 from pytorch_dnn_arsenal.optimizer import build_optimizer, OptimizerSetting
 
-# Added by Kotaro Yoshida
 from domainbed.lib.misc import EBD
 from domainbed.lib.pair_opt import PAIR as pair_opt
 
@@ -1347,20 +1346,6 @@ class vIRMGAME(Algorithm):
     def update(self, minibatches, unlabeled=False):
         all_x = torch.cat([x for x, y in minibatches])
         all_y = torch.cat([y for x, y in minibatches])
-        # loss_phi = F.cross_entropy(self.predict(all_x), all_y)
-        # # update featurizer
-        # self.optimizer_list[self.num_domains].zero_grad()
-        # loss_phi.backward()
-        # self.optimizer_list[self.num_domains].step()
-        
-        # loss_ave = 0.  # list to store loss values
-        # for e in range(self.num_domains):
-        #     loss = F.cross_entropy(self.predict(minibatches[e][0]), minibatches[e][1])
-        #     loss_ave += loss.item()
-        #     # update predictor
-        #     self.optimizer_list[e].zero_grad()
-        #     loss.backward()
-        #     self.optimizer_list[e].step()
         
         e = self.period - 1- (self.update_count % self.period)
         if e < self.num_domains:
@@ -1373,7 +1358,6 @@ class vIRMGAME(Algorithm):
             
         self.update_count += 1
 
-        # return {'loss': loss_ave / self.num_domains}
         return {'loss': loss.item()}
     
     def predict(self, x):
@@ -1564,17 +1548,14 @@ class PAIR(IRM):
             r2 = 1e10
             r_l2 = r*r2
             n_tasks = 1+2
-            # preference = np.array([r,r_l2,(1-r-r_l2)])
             preference = np.array([r,1-r-r2*r,r2*r])
-            # preference = np.array([r,(1-r)/2,(1-r)/2])
         elif preference_choice==3:
             r = 1e-12
             r2 = 1e8
             r_l2 = r*r2
             n_tasks = 1+2
             preference = np.array([r,r_l2,(1-r-r_l2)])
-            # preference = np.array([r,1-r-r2*r,r2*r])
-            # preference = np.array([r,(1-r)/2,(1-r)/2])
+            
         elif preference_choice==4:
             r = 1e-12
             r2 = 1e6
@@ -1605,7 +1586,6 @@ class PAIR(IRM):
             r = 1e-12
             r2 = 1e10
             r_l2 = r*r2
-            # preference = np.array([r,r,1-2*r-r2*r,r2*r])
             preference = np.array([r]+[r_l2,(1-r-r_l2)])
         
         return preference
