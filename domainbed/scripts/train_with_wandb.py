@@ -35,7 +35,7 @@ if __name__ == "__main__":
     parser.add_argument('--seed', type=int, default=0,
         help='Seed for everything else')
 
-    parser.add_argument('--wandb_entity_name', type=str, default="mila_tokyotech")
+    parser.add_argument('--wandb_entity_name', type=str, default="hoge")
     parser.add_argument('--wandb_project_name', type=str, default="default_project")
     parser.add_argument('--wandb_exp_id', type=str, default="99999")
 
