@@ -2,10 +2,6 @@
 import attr
 import torch.optim as optim
 
-# from .lars import LARS  # noqa: F401
-# from .adabound import AdaBound
-# from .kfac import KFACOptimizer
-
 from .conjugate_gradient import ConjugateGradientOptimizer
 from .sam import SAM
 import torch_optimizer
