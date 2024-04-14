@@ -8,6 +8,9 @@ Machine learning models traditionally assume that training and test data are ind
 
 [Hiroki Naganuma](https://github.com/Hiroki11x)
 
+## Paper link
+[Arxiv](https://arxiv.org/abs/2401.17541)
+
 ## Citation
 ```
 @misc{yoshida2024understanding,
